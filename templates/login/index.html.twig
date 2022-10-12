@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LoginController!{% endblock %}
+
+{% block body %}
+
+    <div class="container my-5" style="height: 80vh;">
+        {% if error %}
+            <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+
+
+        <form class="contact-form-wrapper" method="post" action="{{ path('app_login') }}">
+            <h5 data-aos="fade-up">Авторизация</h5>
+            <div class="row">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="form-group col-md-6" data-aos="fade-up">
+                    <label for="username">Почта</label>
+                    <input type="text" class="form-control" id="username" name="_username" value="{{ last_username }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6" data-aos="fade-up">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg" data-aos="fade-up" data-aos-delay="300">Войти</button>
+        </form>
+    </div>
+{% endblock %}

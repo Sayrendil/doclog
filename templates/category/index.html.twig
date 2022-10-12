@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Категории документов!{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block body %}
+    <section class="edica-landing-section edica-landing-clients my-5">
+        <div class="container">
+            <h4 class="edica-landing-section-subtitle-alt">Категории</h4>
+            <div class="partners-wrapper">
+                <ul class="list-group">
+                    {% for category in categories %}
+                        <li class="list-group-item">{{ category.name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+{% endblock %}

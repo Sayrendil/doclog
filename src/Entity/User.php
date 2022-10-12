@@ -42,6 +42,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\OneToOne(mappedBy: 'to_user', cascade: ['persist', 'remove'])]
+    private ?Document $document_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -168,6 +171,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getDocumentId(): ?Document
+    {
+        return $this->document_id;
+    }
+
+    public function setDocumentId(?Document $document_id): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($document_id === null && $this->document_id !== null) {
+            $this->document_id->setToUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($document_id !== null && $document_id->getToUser() !== $this) {
+            $document_id->setToUser($this);
+        }
+
+        $this->document_id = $document_id;
 
         return $this;
     }

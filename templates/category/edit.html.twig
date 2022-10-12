@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Изменить категорию!{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block body %}
+    <div class="container my-5" style="height: 80vh;">
+        
+
+
+        <form class="contact-form-wrapper" method="post" action="{{ path('store_category') }}">
+            <h5 data-aos="fade-up"></h5>
+            <div class="row">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="form-group col-md-6" data-aos="fade-up">
+                    <label for="name">Наименование категории</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ category.name }}">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-warning btn-lg" data-aos="fade-up" data-aos-delay="300">Создать</button>
+        </form>
+    </div>
+{% endblock %}
